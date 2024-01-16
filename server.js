@@ -11,6 +11,10 @@ const port = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
 
+//Link to Swagger document
+const expressOasGenerator = require('express-oas-generator');
+expressOasGenerator.init(app, {}); // to overwrite generated specification's values use second argument.
+
 // Read authors from file.
 // const webroot = 'wwwroot';
 // const uri = 'mock-authors.json';
@@ -77,6 +81,11 @@ app.get('/api/authors/:name', async (req, res) => {
 
 // GET: api/headers/
 app.get('/api/headers', async (req, res) => {
+    res.send(JSON.stringify(req.headers));
+});
+
+// GET: api/test/
+app.get('/api/test', async (req, res) => {
     res.send(JSON.stringify(req.headers));
 });
 
